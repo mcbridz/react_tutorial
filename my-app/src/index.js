@@ -70,26 +70,25 @@ class Game extends React.Component {
             xIsNext: !this.state.xIsNext
         })
     }
-    jumpTo(step) {
-        this.setState({ stepNumber: step, xIsNext: (step % 2) === 0 })
+    undo() {
+        const newHistory = this.state.history.slice(0, this.state.stepNumber)
+        let newStep = this.state.stepNumber - 1
+        this.setState({ stepNumber: newStep, xIsNext: (newStep % 2) === 0, history: newHistory })
     }
     render() {
         const history = this.state.history
         const current = history[this.state.stepNumber]
         const winner = calculateWinner(current.squares)
-        const moves = history.map((step, move) => {
-            const desc = move ? 'Go to move#' + move : 'Go to game start'
-            return (
-                <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
-                </li>
-            )
-        })
+        const stepNumber = this.state.stepNumber
         let status
         if (winner) {
             status = 'Winner: ' + winner
         } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O')
+        }
+        let undoBtn = <div></div>
+        if (stepNumber) {
+            undoBtn = <div><button onClick={() => this.undo()}>Undo Last Step</button></div>
         }
         return (
             <div className="game">
@@ -98,7 +97,7 @@ class Game extends React.Component {
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
-                    <ol>{moves}</ol>
+                    {undoBtn}
                 </div>
             </div>
         );
