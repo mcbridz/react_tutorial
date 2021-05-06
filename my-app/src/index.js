@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { useState, useEffect } from 'react'
 import './index.css'
 
 // class Square extends React.Component {
@@ -141,6 +142,91 @@ class Game extends React.Component {
         )
     }
 }
+
+// function Game() {
+//     // constructor(props) {
+//     //     super(props)
+//     //     this.state = newGameState
+//     // }
+//     const [state, setState] = useState(newGameState)
+//     const handleClick = (i) => {
+//         if (state.gameInProgress) {
+//             const history = state.history.slice(0, state.stepNumber + 1)
+//             const current = history[history.length - 1]
+//             const squares = current.squares.slice()
+//             if (calculateWinner(squares) || squares[i]) return
+//             squares[i] = state.xIsNext ? 'X' : 'O'
+//             setState({
+//                 history: history.concat([{ squares: squares }]),
+//                 stepNumber: history.length,
+//                 xIsNext: !state.xIsNext
+//             })
+//         }
+//     }
+//     const undo = () => {
+//         // const newHistory = state.history.slice(0, state.stepNumber)
+//         let newStep = state.stepNumber - 1
+//         setState({ stepNumber: newStep, xIsNext: ((newStep + state.modifier) % 2) === 0, gameInProgress: false })
+//     }
+//     const redo = () => {
+//         let newStep = state.stepNumber + 1
+//         let isgameInProgress = false
+//         if (newStep === state.history.length - 1) {
+//             isgameInProgress = true
+//         }
+//         setState({ stepNumber: newStep, xIsNext: ((newStep + state.modifier) % 2) === 0, gameInProgress: isgameInProgress })
+//     }
+//     const restart = () => {
+//         setState(newGameState)
+//     }
+//     const startGame = (xIsFirst) => {
+//         console.log('Starting game')
+//         console.log(state)
+//         if (xIsFirst) {
+//             setState({ firstPlayerChosen: true })
+//         } else {
+//             setState({ firstPlayerChosen: true, xIsNext: false, modifier: true })
+//         }
+//     }
+//     const history = state.history
+//     const current = history[state.stepNumber]
+//     const winner = calculateWinner(current.squares)
+//     const stepNumber = state.stepNumber
+//     let status
+//     let restartBtn = <div></div>
+//     if (winner) {
+//         status = 'Winner: ' + winner
+//         restartBtn = <div><button onClick={() => restart()}>Start Over?</button></div>
+//     } else {
+//         status = 'Next player: ' + (state.xIsNext ? 'X' : 'O')
+//     }
+//     let undoBtn = <div></div>
+//     if (stepNumber) {
+//         undoBtn = <div><button onClick={() => undo()}>Undo Last Step</button></div>
+//     }
+//     let redoBtn = <div></div>
+//     if (stepNumber !== history.length - 1) {
+//         redoBtn = <div><button onClick={() => redo()}>Redo Step</button></div>
+//     }
+//     if (state.firstPlayerChosen) {
+//         return (
+//             <div className="game">
+//                 <div className="game-board">
+//                     <Board squares={current.squares} onClick={(i) => handleClick(i)} />
+//                 </div>
+//                 <div className="game-info">
+//                     <div>{status}</div>
+//                     {undoBtn}
+//                     {redoBtn}
+//                     {restartBtn}
+//                 </div>
+//             </div>
+//         )
+//     }
+//     return (
+//         <div><button onClick={() => startGame(true)}>X</button><span> Who is going first? </span><button onClick={() => startGame(false)}>O</button></div>
+//     )
+// }
 
 // ========================================
 
